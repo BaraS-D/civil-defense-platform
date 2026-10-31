@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>رصد الأرض للدفاع المدني – العراق</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>رصد الأرض للدفاع المدني</h1>
+    <span id="updated" class="muted">جاري تحميل البيانات…</span>
+    <button id="toggle" type="button" aria-expanded="true">القائمة</button>
+  </header>
+
+  <div class="layout">
+    <aside id="panel">
+      <form id="search" role="search">
+        <input id="q" type="search" placeholder="ابحث عن منطقة أو مدينة" aria-label="بحث">
+        <button type="submit">بحث</button>
+      </form>
+
+      <section>
+        <h2>الخريطة الأساسية</h2>
+        <label><input type="radio" name="base" value="osm" checked> خريطة الشوارع</label>
+        <label><input type="radio" name="base" value="esri"> صورة قمر صناعي (Esri)</label>
+        <label><input type="radio" name="base" value="gibs"> NASA VIIRS ألوان حقيقية (أمس)</label>
+      </section>
+
+      <section>
+        <h2>الطبقات</h2>
+        <label><span class="dot fire"></span><input type="checkbox" id="l-fires" checked> حرائق مرصودة</label>
+        <label><span class="dot flare"></span><input type="checkbox" id="l-flares"> مشاعل ومصادر حرارة ثابتة</label>
+        <div id="gas-layers"></div>
+        <label class="opacity">شفافية طبقات الغازات
+          <input type="range" id="opacity" min="0.2" max="1" step="0.05" value="0.75">
+        </label>
+        <div id="legend"></div>
+      </section>
+
+      <section class="lists">
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" data-tab="fires" aria-selected="true">الحرائق</button>
+          <button type="button" role="tab" data-tab="alerts" aria-selected="false">مؤشرات الغازات</button>
+        </div>
+        <ul id="list-fires" class="list"></ul>
+        <ul id="list-alerts" class="list" hidden></ul>
+        <div class="export">
+          <a href="data/fires.geojson" download>تنزيل الحرائق GeoJSON</a>
+          <button type="button" id="csv">تنزيل CSV</button>
+        </div>
+      </section>
+
+      <section class="note">
+        <strong>تنبيه:</strong> هذه أداة دعم قرار تعتمد على بيانات أقمار صناعية. دقة قياسات الغازات
+        نحو 5 كم وتتحدث مرة أو مرتين باليوم، فلا تكشف التسربات الموضعية الصغيرة، والقيم المرتفعة
+        مؤشر يحتاج تحققاً ميدانياً. الموقع ليس نظام إنذار رسمي.
+      </section>
+    </aside>
+
+    <main id="map" aria-label="الخريطة"></main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
