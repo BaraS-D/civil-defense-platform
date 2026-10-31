@@ -28,14 +28,14 @@ jobs:
 
       - name: سحب الحرائق (FIRMS)
         env:
-          FIRMS_MAP_KEY: ${{ secrets.FIRMS_MAP_KEY }}
+          FIRMS_MAP_KEY: ${{ 72763211244d71028eabb756ccebb435 }}
         run: python scripts/fetch_fires.py
         continue-on-error: true
 
       - name: سحب الغازات (Sentinel-5P)
         env:
-          CDSE_CLIENT_ID: ${{ secrets.CDSE_CLIENT_ID }}
-          CDSE_CLIENT_SECRET: ${{ secrets.CDSE_CLIENT_SECRET }}
+          CDSE_CLIENT_ID: ${{ sh-d8ce84db-b16d-4853-a521-04d9424a7de8 }}
+          CDSE_CLIENT_SECRET: ${{ 14fxIf5GLstfF9LELBHiggxmP2uapFjOBVuxjS8BEcTf4swghFjhJrejW6wtiVjLQcTA2wZMyfqtM7niTdE5qE }}
         run: python scripts/fetch_s5p.py
         continue-on-error: true
 
